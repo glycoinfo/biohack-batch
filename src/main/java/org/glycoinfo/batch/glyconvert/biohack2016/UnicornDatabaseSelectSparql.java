@@ -24,11 +24,6 @@ import org.springframework.util.Assert;
  */
 public class UnicornDatabaseSelectSparql extends SelectSparqlBean implements
 		InitializingBean {
-	public static final String SaccharideURI = Saccharide.URI;
-	public static final String Sequence = "Sequence";
-	public static final String GlycanSequenceURI = "GlycanSequenceURI";
-	public static final String AccessionNumber = Saccharide.PrimaryId;
-
 	public UnicornDatabaseSelectSparql(String sparql) {
 		super(sparql);
 	}
@@ -57,9 +52,12 @@ public class UnicornDatabaseSelectSparql extends SelectSparqlBean implements
 	 * @see org.glycoinfo.rdf.SelectSparqlBean#getWhere()
 	 */
 	public String getWhere() {
-		return "?s rdfs:label ?" + Saccharide.PrimaryId + " ." +
-				"?s glycan:has_sequence ?" + GlycoSequence.Sequence + " ." + 
-		getFilter();
+		return "?glycan glycan:has_glycosequence ?gseq .\n" + 
+				"?gseq glycan:has_sequence ?" + GlycoSequence.Sequence + " . \n" + 
+				"?gseq glycan:in_carbohydrate_format  glycan:carbohydrate_format_glycoct .\n" + 
+				"BIND(STR(?glycan) AS ?strGlycan)\n" + 
+				"BIND(STRAFTER(?strGlycan,\"http://unicorn.unicarbkb.org/structure/\") AS ?" + Saccharide.PrimaryId + " )"
+			+ getFilter();
 	}
 
 	/**
