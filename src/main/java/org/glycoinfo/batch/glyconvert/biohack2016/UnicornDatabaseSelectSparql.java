@@ -89,6 +89,6 @@ public class UnicornDatabaseSelectSparql extends SelectSparqlBean implements
 	
 	@Override
 	public String getFrom() {
-    return "FROM <http://unicorn.glycoinfo.org>\n";
+    return "FROM <http://rdf.glycoinfo.org/unicorn>\n";
 	}
 }
