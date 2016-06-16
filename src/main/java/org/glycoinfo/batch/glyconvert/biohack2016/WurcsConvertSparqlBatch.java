@@ -31,12 +31,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
 @EnableAutoConfiguration
-// @ComponentScan(basePackages = ("org.glycoinfo.batch"))
+@ComponentScan(basePackages = ("org.glycoinfo.batch"))
 @EnableBatchProcessing
 @SpringBootApplication
 @Import(VirtSesameTransactionConfig.class)
@@ -83,10 +84,10 @@ public class WurcsConvertSparqlBatch {
 		return convert;
 	}
 
-	@Bean
-	SparqlDAO getSparqlDAO() {
-		return new SparqlDAOVirtSesameImpl();
-	}
+//	@Bean
+//	SparqlDAO getSparqlDAO() {
+//		return new SparqlDAOVirtSesameImpl();
+//	}
 
 //	@Bean
 //	TripleStoreProperties getTripleStoreProperties() {
